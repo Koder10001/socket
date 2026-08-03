@@ -10,6 +10,8 @@ char* binToHex(char* bin,  size_t bit);
 size_t binToUint(char* bin,  size_t bit);
 char* hexToBin(char* hex,  size_t bit);
 size_t hexToUint(char* hex, size_t bit);
+uint32_t htonl(uint32_t hostbyte);
+uint16_t htons(uint16_t hostbyte);
 
 
 int isLittleEndian();

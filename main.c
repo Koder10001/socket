@@ -6,7 +6,7 @@
 #include <math.h>
 #include "ip.h"
 
-#include <arpa/inet.h>
+// #include <arpa/inet.h>
 
 
 
@@ -18,7 +18,6 @@ const char ip[] = "192.168.1.252";
 
 int main(){
     int sock = socket(AF_INET, SOCK_DGRAM, 0);
-    struct sockaddr_in address;
 
 
     if(sock == -1){
@@ -28,8 +27,8 @@ int main(){
 
     uint32_t host = 192;
     uint32_t h = htonl(host);
-    char* binhost = uintToHex(host, 8);
-    char* binh = uintToHex(h, 32/4);
+    char* binhost = uintToHex(host, 64/4);
+    char* binh = uintToHex(h, 64/4);
     printf("%u\n%u\n%s\n%s\n\r\n", host, h, binhost, binh);
 
     // address.sin_addr

@@ -66,3 +66,25 @@ char* uintToHex(size_t num, uint8_t len){
     return result;
 
 }
+
+int isLittleEndian(){
+    uint16_t i = 1;
+    char* a = (char*)&i;
+    return (int)a[0];
+}
+
+uint32_t htonl(uint32_t hostbyte){
+    if(isLittleEndian() == 0){
+        return hostbyte;
+    }
+
+    return ((hostbyte & 0xFF000000) >> 24) | ((hostbyte & 0x00FF0000) >> 8) | ((hostbyte & 0x0000FF00) << 8) | ((hostbyte & 0x000000FF) << 24);
+}
+
+uint16_t htons(uint16_t hostbyte){
+    if(isLittleEndian() == 0){
+        return hostbyte;
+    }
+
+    return (hostbyte >> 8) | (hostbyte << 8);
+}
