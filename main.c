@@ -28,8 +28,8 @@ int main(){
 
     uint32_t host = 192;
     uint32_t h = htonl(host);
-    char* binhost = uintToBin(host, 32);
-    char* binh = uintToHex(h, 32);
+    char* binhost = uintToHex(host, 8);
+    char* binh = uintToHex(h, 32/4);
     printf("%u\n%u\n%s\n%s\n\r\n", host, h, binhost, binh);
 
     // address.sin_addr
@@ -42,8 +42,3 @@ void printErr(){
     printf("Error code: %d\r\n", errno);
     printf("Error message: %s\r\n", strerror(errno));
 }
-
-char* binToHex(char* bin);
-size_t binToUint(char* bin);
-char* hexToBin(char* hex);
-size_t hexToUint(char* hex);
