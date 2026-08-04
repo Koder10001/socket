@@ -25,10 +25,10 @@ int main(){
     }
     printf("succesfully created socket\r\n");
 
-    uint32_t host = 192;
+    uint32_t host = 67000;
     uint32_t h = htonl(host);
-    char* binhost = uintToHex(host, 64/4);
-    char* binh = uintToHex(h, 64/4);
+    char* binhost = uintToHex(host, 32/4);
+    char* binh = uintToHex(h, 32/4);
     printf("%u\n%u\n%s\n%s\n\r\n", host, h, binhost, binh);
 
     // address.sin_addr

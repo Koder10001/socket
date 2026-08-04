@@ -42,9 +42,9 @@ char* uintToHex(size_t num, uint8_t len){
     size_t index = 0;
 
     for(size_t i = 0; i < len; i++){
-        printf("%u %u %u %u\n", num, i, ex, len);
+        printf("%zu %zu %zu %zu\n", num, i, ex, len);
         
-        if(ex < num && ex != 0){
+        if(ex <= num && ex != 0){
             size_t a = 15;
             while (a > 0){
                 if(ex * a <= num){
