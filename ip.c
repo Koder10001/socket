@@ -88,3 +88,24 @@ uint16_t htons(uint16_t hostbyte){
 
     return (hostbyte >> 8) | (hostbyte << 8);
 }
+
+
+
+uint32_t ipv4ToInt(char* ip){
+    uint32_t ipNum;
+    printf("%zu bytes %s\n", sizeof(ip), ip);
+    uint8_t dotCount = 0;
+    uint32_t octet = 0;
+    while(*ip != '\0'){
+        if(*ip == '.'){
+            octet = 0;
+            dotCount++;
+            
+            
+
+            continue;
+        }
+        
+    }
+    return (uint32_t)0;
+}
