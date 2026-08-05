@@ -97,24 +97,24 @@ uint32_t ipv4ToInt(char* ip){
     // printf("%zu bytes %s\n", sizeof(ip), ip);
     uint8_t dotCount = 0;
     uint32_t octet = 0;
-    while(*ip != '\0'){
-        if(*ip == '.'){
+    while(*ptr != '\0'){
+        if(*ptr == '.'){
             
             ipNum = ipNum | (octet << (3 - dotCount) * 8);
 
             octet = 0;
             dotCount++;
         }
-        else if(*ip >= 48 && *ip <= 57){
+        else if(*ptr >= 48 && *ptr <= 57){
             octet *= 10;
-            octet += *ip - 48;
+            octet += *ptr - 48;
         }
         else {
             printf("Error: Failed to parse ip\n");
             exit(1);
         }
 
-        ip++;
+        ptr++;
 
     }
     ipNum = ipNum | octet;
@@ -133,6 +133,7 @@ uint16_t* ipv6ToInt(char* ip){
             hextet = 0;
             ptr++;
             colonCount++;
+            
             continue;
         }
         else if(*ptr >= 65 && *ptr <= 70){ // A-F
