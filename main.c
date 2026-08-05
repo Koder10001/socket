@@ -2,9 +2,11 @@
 #include <stdlib.h>
 #include <sys/socket.h>
 #include <errno.h>
-#include <string.h>
 #include <math.h>
 #include "ip.h"
+
+// linux only
+#include <linux/if_ether.h>
 
 // #include <arpa/inet.h>
 
@@ -15,7 +17,7 @@ void printErr();
 const char ip[] = "192.168.1.252";
 
 int main(){
-    int sock = socket(AF_PACKET, SOCK_RAW, 256);
+    int sock = socket(AF_PACKET, SOCK_RAW, htons(17));
 
 
     if(sock == -1){
@@ -32,19 +34,22 @@ int main(){
 
     // address.sin_addr
 
-    char* a = "0123456789.:";
+    // char* a = "192.168.5.42";
     // uint32_t ip = ipv4ToInt(a);
-    // printf("==%zu==\n", &ip);
+    // printf("==%s %zu==\n", uintToBin(ip, 32), ip);
 
-    for(size_t i = 0; i < 256; i++){
-        printf("%c %zu\n", i, i);
-    }
+
 
     printf("end\n");
+
+    // for(size_t i = 0; i < 256 ; i++){
+    //     printf("%c %u\n", i, i);
+    // }
+
 }
 
 
 void printErr(){
     printf("Error code: %d\r\n", errno);
-    printf("Error message: %s\r\n", strerror(errno));
+    perror("Error");
 }

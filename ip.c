@@ -92,20 +92,62 @@ uint16_t htons(uint16_t hostbyte){
 
 
 uint32_t ipv4ToInt(char* ip){
-    uint32_t ipNum;
-    printf("%zu bytes %s\n", sizeof(ip), ip);
+    char* ptr = ip;
+    uint32_t ipNum = 0;
+    // printf("%zu bytes %s\n", sizeof(ip), ip);
     uint8_t dotCount = 0;
     uint32_t octet = 0;
     while(*ip != '\0'){
         if(*ip == '.'){
+            
+            ipNum = ipNum | (octet << (3 - dotCount) * 8);
+
             octet = 0;
             dotCount++;
-            
-            
+        }
+        else if(*ip >= 48 && *ip <= 57){
+            octet *= 10;
+            octet += *ip - 48;
+        }
+        else {
+            printf("Error: Failed to parse ip\n");
+            exit(1);
+        }
 
+        ip++;
+
+    }
+    ipNum = ipNum | octet;
+    return ipNum;
+}
+
+uint16_t* ipv6ToInt(char* ip){
+    char *ptr = ip;
+    uint16_t ipNum[8];
+    uint16_t hextet = 0;
+    uint8_t tmp;
+    uint8_t colonCount = 0;
+
+    while(*ptr != '\0'){
+        if (*ptr = ':'){ // :
+            hextet = 0;
+            ptr++;
+            colonCount++;
             continue;
         }
-        
+        else if(*ptr >= 65 && *ptr <= 70){ // A-F
+            tmp = *ptr - 55;
+        }
+        else if(*ptr - 32 >= 65 && *ptr - 32 <= 70){ // a-f
+            *ptr -= 32;
+            tmp = *ptr - 55;
+        }
+        else if (*ptr >= 48 && *ptr <= 57) { // 0-9
+            tmp = *ptr - 48;
+        }
+        hextet *= 10;
+        hextet += tmp;
+        ptr++;
+
     }
-    return (uint32_t)0;
 }

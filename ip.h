@@ -12,7 +12,7 @@ char* uintToHex(size_t num, uint8_t len);
 // size_t hexToUint(char* hex, size_t bit);
 
 uint32_t ipv4ToInt(char* ip);
-uint32_t* ipv6ToInt(char* ip);
+uint16_t* ipv6ToInt(char* ip);
 
 
 uint32_t htonl(uint32_t hostbyte);
