@@ -3,11 +3,14 @@
 #include <sys/socket.h>
 #include <errno.h>
 #include <math.h>
+
 #include "ip.h"
 #include "frame.h"
+#include "debug.h"
 
 // linux only
 #include <linux/if_ether.h>
+#include <linux/if.h>
 
 // #include <arpa/inet.h>
 
@@ -19,11 +22,24 @@ const char ip[] = "192.168.1.252";
 
 int main(){
 
+    char iface[IFNAMSIZ] = "wlp4s0";
+    char* sourceMac;
+    int ifindex;
 
     int sock = socket(AF_PACKET, SOCK_RAW, htons(ETH_P_ALL));
+    if(sock < 0){
+        perror("Error");
+        exit(1);
+    }
 
+    printf("Socket created successfully: %d\n", sock);
 
-    printf("%x\n", getMacAddress(sock, (char *)"wlp4s0"));
+    sourceMac = getSourceMacAddress(sock, iface);
+    printMacAddress(sourceMac);
+    ifindex = getIfaceIndex(sock, iface);
+    
+
+    printf("Interface index: %d\n", ifindex);
 
 
     // if(sock == -1){
