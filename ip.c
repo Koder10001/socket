@@ -3,6 +3,8 @@
 #include <stdlib.h>
 #include <stdint.h>
 
+
+
 int isLittleEndian(){
     uint16_t i = 1;
     char* a = (char*)&i;
@@ -87,4 +89,10 @@ uint16_t* ipv6ToInt(char* ip){
         ptr++;
 
     }
+}
+
+char* macToint(char* mac){
+
+    
+
 }

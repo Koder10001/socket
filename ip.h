@@ -1,8 +1,8 @@
 #include <stdlib.h>
 #include <stdint.h>
 
-#ifndef IP_HEADER
-#define IP_HEADER
+#ifndef IP_H
+#define IP_H
 
 
 // char* binToHex(char* bin,  size_t bit);
@@ -12,7 +12,7 @@
 
 uint32_t ipv4ToInt(char* ip);
 uint16_t* ipv6ToInt(char* ip);
-
+char* macToint(char* mac);
 
 uint32_t htonl(uint32_t hostbyte);
 uint16_t htons(uint16_t hostbyte);

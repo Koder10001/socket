@@ -24,6 +24,7 @@ int main(){
 
     char iface[IFNAMSIZ] = "wlp4s0";
     char* sourceMac;
+    char* nextIP;
     int ifindex;
 
     int sock = socket(AF_PACKET, SOCK_RAW, htons(ETH_P_ALL));
@@ -40,6 +41,10 @@ int main(){
     
 
     printf("Interface index: %d\n", ifindex);
+
+    nextIP = getNextNodeIP(iface);
+
+    printf("%s\n", ipv4ToInt(nextIP));
 
 
     // if(sock == -1){
