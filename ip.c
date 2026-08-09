@@ -59,6 +59,39 @@ uint32_t ipv4ToInt(char* ip){
     return ipNum;
 }
 
+uint32_t hexToIP(char* hex){
+    char *ptr = hex;
+    uint8_t value;
+    uint8_t len = sizeof(hex) / sizeof(hex[0]);
+    uint32_t ip = 0;
+    printf("%s\n", hex);
+
+    uint32_t ex = (uint32_t)1 << ((len - 1) * 4);
+
+    while (ptr - hex < len){
+
+        // printf("%u %u %u\n", ex, len);
+
+        if(*ptr >= 48 && *ptr <= 57){
+            value = *ptr - 48;
+        }
+        else if(*ptr >= 65 && *ptr <= 70){ // A-F 65-70
+            value = *ptr - 55; // 10 offset;
+        }
+        else if(*ptr - 32 >= 65 && *ptr - 32 <= 70){ // a-f 
+            value = *ptr - 32; // to uppercase
+            value = *ptr - 55; // 10 offset;
+        }
+
+        ip += value * ex;
+
+        ex = ex >> 4;
+        ptr++;
+    }
+
+    return ip;
+}
+
 uint16_t* ipv6ToInt(char* ip){
     char *ptr = ip;
     uint16_t ipNum[8];

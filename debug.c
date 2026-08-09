@@ -78,3 +78,4 @@ void printMacAddress(char* mac){
     }
     printf("%s\n", uintToHex(num, 6));
 }
+

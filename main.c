@@ -44,8 +44,9 @@ int main(){
 
     nextIP = getNextNodeIP(iface);
 
-    printf("%s\n", ipv4ToInt(nextIP));
+    printf("%u\n", htonl(hexToIP(nextIP)));
 
+    
 
     // if(sock == -1){
     //     printErr();

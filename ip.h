@@ -12,6 +12,8 @@
 
 uint32_t ipv4ToInt(char* ip);
 uint16_t* ipv6ToInt(char* ip);
+
+uint32_t hexToIP(char* hex);
 char* macToint(char* mac);
 
 uint32_t htonl(uint32_t hostbyte);
