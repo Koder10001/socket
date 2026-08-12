@@ -1,7 +1,5 @@
+#include "header.h"
 #include <stdint.h>
-
-#ifndef PROTOCOL_H
-#define PROTOCOL_H
 
 enum etype{
     ip4 = (uint16_t)0x0800,
@@ -28,6 +26,7 @@ struct ipv4_header {
     char checksum[2];
     char sourceIP[4];
     char destIP[4];
+    char *data;
 };
 struct ipv6_header {
     char version_trafficClass_FlowLabel[4];
@@ -36,6 +35,7 @@ struct ipv6_header {
     char hopLimit[1];
     char sourceIP[16];
     char destIP[16];
+    char *data;
 };
 struct tcp_header {
     char sourcePort[2];
@@ -66,4 +66,7 @@ struct icmp_header {
 };
 
 
-#endif
+
+// void createEtherFrame(eth_h *eth, etype type){
+    
+// }

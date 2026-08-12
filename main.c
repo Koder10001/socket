@@ -22,7 +22,7 @@ const char ip[] = "192.168.1.252";
 
 int main(){
 
-    char iface[IFNAMSIZ] = "wlp4s0";
+    char iface[IFNAMSIZ] = "wlp43s0";
     char* sourceMac;
     char* nextIP;
     int ifindex;
@@ -36,7 +36,9 @@ int main(){
     printf("Socket created successfully: %d\n", sock);
 
     sourceMac = getSourceMacAddress(sock, iface);
-    printMacAddress(sourceMac);
+
+    printf("Source mac: %x\n",sourceMac);
+
     ifindex = getIfaceIndex(sock, iface);
     
 

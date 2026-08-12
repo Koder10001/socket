@@ -70,12 +70,36 @@ char* uintToHex(size_t num, uint8_t byte){
 
 } 
 
-void printMacAddress(char* mac){
-    size_t len = sizeof(mac) / sizeof(mac[0]);
-    size_t num = 0;
-    for(size_t i = 0 ; i < 6; i++){
-        num = (num << 8) | (uint8_t)mac[i];
+
+uint64_t hexToUint(char* hex){
+    uint8_t len = sizeof(hex) / sizeof(hex[0]);
+    uint64_t num = 0;
+    uint64_t ex = (uint64_t)1 << ((len - 1) * 4);
+
+    for(int i = 0; i < len; i++){
+        printf("%u %u %u\n ", num, hex[i], len);
+        if(hex[i] >= 48 && hex[i] <= 57){
+            num += (hex[i] - 48) * ex;
+        }
+        else if(hex[i] >= 65 && hex[i] <= 70){
+            num += (hex[i] - 55) * ex; // 10 offset
+        }
+        else if(hex[i] >= 97 && hex[i] <= 102){
+            num += (hex[i] - 87) * ex; // 10 offset
+        }
+        else {
+            printf("Error : %c", hex[i]);
+            return -1;
+            exit(1);
+        }
+        ex = ex >> 4;
     }
-    printf("%s\n", uintToHex(num, 6));
+    return num;
 }
 
+char* textToHex(char* hex){
+    
+}
+
+
+char* printMacFromHex()
