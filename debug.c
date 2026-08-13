@@ -97,8 +97,16 @@ uint64_t hexToUint(char* hex){
     return num;
 }
 
-char* textToHex(char* hex){
-    
+char* textToHex(char* txthex){
+    uint8_t len = sizeof(txthex) / sizeof(txthex[0]);
+    char* hex = (char)malloc(sizeof(char) * (len / 2)); // 2 letter = 1 byte
+    memset(hex, 0x00, sizeof(hex));
+
+    for(uint8_t i = 0; i < len; i++){
+        if(i % 2 == 0){
+            hex[i/2] = 
+        }
+    }
 }
 
 
