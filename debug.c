@@ -75,23 +75,31 @@ uint64_t hexToUint(char* hex){
     uint8_t len = sizeof(hex) / sizeof(hex[0]);
     uint64_t num = 0;
     uint64_t ex = (uint64_t)1 << ((len - 1) * 4);
+    uint8_t charVal;
 
     for(int i = 0; i < len; i++){
         printf("%u %u %u\n ", num, hex[i], len);
-        if(hex[i] >= 48 && hex[i] <= 57){
-            num += (hex[i] - 48) * ex;
-        }
-        else if(hex[i] >= 65 && hex[i] <= 70){
-            num += (hex[i] - 55) * ex; // 10 offset
-        }
-        else if(hex[i] >= 97 && hex[i] <= 102){
-            num += (hex[i] - 87) * ex; // 10 offset
-        }
-        else {
-            printf("Error : %c", hex[i]);
+
+        charVal = hexCharToInt(hex[i]);
+        if(charVal < 0){
             return -1;
-            exit(1);
         }
+        num += charVal * ex;
+        // if(hex[i] >= 48 && hex[i] <= 57){
+        //     num += (hex[i] - 48) * ex;
+        // }
+        // else if(hex[i] >= 65 && hex[i] <= 70){
+        //     num += (hex[i] - 55) * ex; // 10 offset
+        // }
+        // else if(hex[i] >= 97 && hex[i] <= 102){
+        //     num += (hex[i] - 87) * ex; // 10 offset
+        // }
+        
+        // else {
+        //     printf("Error : %c", hex[i]);
+        //     return -1;
+        //     exit(1);
+        // }
         ex = ex >> 4;
     }
     return num;
@@ -100,14 +108,31 @@ uint64_t hexToUint(char* hex){
 char* textToHex(char* txthex){
     uint8_t len = sizeof(txthex) / sizeof(txthex[0]);
     char* hex = (char)malloc(sizeof(char) * (len / 2)); // 2 letter = 1 byte
+    uint8_t charVal;
     memset(hex, 0x00, sizeof(hex));
 
     for(uint8_t i = 0; i < len; i++){
-        if(i % 2 == 0){
-            hex[i/2] = 
+        charVal = hexCharToInt(txthex[i]);
+        if(charVal < 0){
+            return -1;
         }
+        
     }
 }
 
+uint8_t hexCharToInt(char c){
+    if(c >= 48 && c <= 57){
+        return c - 48;
+    }
+    else if(c >= 65 && c <= 70){
+        return c - 55;
+    }
+    else if(c >= 97 && c <= 102){
+        return c - 87;
+    }
+    else {
+        return -1;
+    }
+}
 
 char* printMacFromHex()
